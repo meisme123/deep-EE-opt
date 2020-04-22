@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2018 Bho Matthiesen
+# Copyright (C) 2018-2020 Bho Matthiesen, Karl-Ludwig Besser
 # 
 # This program is used in the article:
 # 
-# Bho Matthiesen, Alessio Zappone, Eduard A. Jorswieck, and Merouane Debbah,
-# "Deep Learning for Optimal Energy-Efficient Power Control in Wireless
-# Interference Networks," submitted to IEEE Journal on Selected Areas in
-# Communication.
+# Bho Matthiesen, Alessio Zappone, Karl-L. Besser, Eduard A. Jorswieck, and
+# Merouane Debbah, "A Globally Optimal Energy-Efficient Power Control Framework
+# and its Efficient Implementation in Wireless Interference Networks,"
+# submitted to IEEE Transactions on Signal Processing
 # 
 # License:
 # This program is licensed under the GPLv2 license. If you in any way use this
@@ -95,7 +95,7 @@ def SCA(h, mu, Pc, Pmax, pt = None, MaxIter = 10000, parm_alpha = 1e-8, parm_bet
 
         # solve inner problem
         pvar = cp.Variable(4)
-        obj_nl = cp.log(cp.multiply(np.diag(s)/tmp2, pvar)+1) * txp
+        obj_nl = cp.log(cp.multiply(np.diag(h)/tmp2, pvar)+1) * txp
         obj_l  = cp.multiply(c, pvar)
 
         objective = cp.Maximize(cp.sum(obj_nl + obj_l + d))
@@ -152,7 +152,7 @@ if __name__ == "__main__":
     import itertools as it
     import h5py
 
-    dfn = '../../data/results.h5'
+    dfn = '../../data/wsee4-processed.h5'
     mu = 4
     Pc = 1
 
